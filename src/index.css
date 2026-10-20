@@ -1,0 +1,179 @@
+:root {
+  --creme: #fbf3c4;
+  --vermelho-escuro: #5c0000;
+  --vermelho: #c8000a;
+  --rosa: #f4a3a3;
+  --chao: #4a4446;
+  --chao-claro: #c48a90;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--creme);
+  overflow: hidden;
+}
+
+/* ---------- Dashboard (trilho horizontal) ---------- */
+
+.dashboard {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.trilho {
+  --largura: 80vw;
+  --gap: 4vw;
+  display: flex;
+  gap: var(--gap);
+  padding-inline: calc((100vw - var(--largura)) / 2);
+  transform: translateX(calc(var(--ativo) * -1 * (var(--largura) + var(--gap))));
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.trilho__item {
+  flex: 0 0 var(--largura);
+  height: min(85vh, calc(var(--largura) * 0.56));
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.4s;
+}
+
+.trilho__item.is-ativo {
+  opacity: 1;
+  cursor: default;
+}
+
+/* ---------- Painel (blade) ---------- */
+
+.painel {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  background:
+    linear-gradient(to bottom, transparent 62%, var(--chao) 62%, var(--chao-claro) 100%),
+    linear-gradient(110deg, var(--vermelho-escuro), var(--vermelho) 35%, var(--rosa));
+}
+
+.painel__topo {
+  position: absolute;
+  top: 6%;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.painel__titulo {
+  font-size: clamp(20px, 2.4vw, 36px);
+}
+
+.gamertag {
+  display: flex;
+  gap: 10px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.gamertag div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.gamertag__foto {
+  width: 48px;
+  height: 48px;
+  background: #ccc;
+}
+
+.painel__rodape {
+  position: absolute;
+  bottom: 6%;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.botao {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff5a5a, #b00000);
+}
+
+.painel__avatar {
+  position: absolute;
+  right: 4%;
+  bottom: 8%;
+  width: 28%;
+  height: 80%;
+  pointer-events: none;
+}
+
+/* ---------- Carrossel ---------- */
+
+.carrossel {
+  position: absolute;
+  inset: 28% 0 auto 0;
+  height: 220px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 80px);
+  width: 160px;
+  height: 220px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  background: linear-gradient(#e0262b, #7a0d10);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+  cursor: pointer;
+}
+
+.card--foco {
+  outline: 3px solid rgb(255 255 255 / 0.8);
+}
+
+.card__titulo {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.card img,
+.card__placeholder {
+  flex: 1;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.85);
+}
